@@ -1,0 +1,12 @@
+1. Design an application, which is able to find the alphabet of a sequence S, S = "ATTTCGCCGATA"
+The alphabet of a sequence constitutes the set of unique symbols, that make up sequence S.
+
+2. Design application, which finds the relative frequences for the symbols found in the alphabet of sequence S. 
+
+3. Use the AI to design an application with a GUI that displays a button and allows a user to choose a FASTA file.
+A FASTA file is a specific format for bioinformatics in which specific biological sequences are stored. 
+The first line in a file is the information about the sequence line. 
+Starting from the second line and till the end of the file is the biological sequence, which is split in 80 char lines. 
+Use a FASTA file that is bigger than 100 MB. The output should have all percentages of a sequences.  
+
+https://ftp.ncbi.nlm.nih.gov/refseq/release/mitochondrion/mitochondrion.1.1.genomic.fna.gz
