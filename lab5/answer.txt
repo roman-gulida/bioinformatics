@@ -1,0 +1,7 @@
+The main problem is gaps in coverage. When we take random samples, there is no
+guarantee that every position in the original sequence will appear in at least
+one sample. Some parts may never be sampled at all, so we can’t reconstruct
+those regions.
+Even with 2000 samples, random picking can still leave gaps, especially near the
+ends or just by chance in some areas. The algorithm can only rebuild the parts
+that were actually covered by the samples.
