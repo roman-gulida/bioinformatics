@@ -1,0 +1,89 @@
+import random
+import matplotlib.pyplot as plt
+
+seq = """ATTAAAGGTTTATACCTTCCCAGGTAACAAACCAACCAACTTTCGATCTCTTGTAGATCTGTTCTCTAAA
+CGAACTTTAAAATCTGTGTGGCTGTCACTCGGCTGCATGCTTAGTGCACTCACGCAGTATAATTAATAAC
+TAATTACTGTCGTTGACAGGACACGAGTAACTCGTCTATCTTCTGCAGGCTGCTTACGGTTTCGTCCGTG
+TTGCAGCCGATCATCAGCACATCTAGGTTTCGTCCGGGTGTGACCGAAAGGTAAGATGGAGAGCCTTGTC
+CCTGGTTTCAACGAGAAAACACACGTCCAACTCAGTTTGCCTGTTTTACAGGTTCGCGACGTGCTCGTAC
+GTGGCTTTGGAGACTCCGTGGAGGAGGTCTTATCAGAGGCACGTCAACATCTTAAAGATGGCACTTGTGG
+CTTAGTAGAAGTTGAAAAAGGCGTTTTGCCTCAACTTGAACAGCCCTATGTGTTCATCAAACGTTCGGAT
+GCTCGAACTGCACCTCATGGTCATGTTATGGTTGAGCTGGTAGCAGAACTCGAAGGCATTCAGTACGGTC
+GTAGTGGTGAGACACTTGGTGTCCTTGTCCCTCATGTGGGCGAAATACCAGTGGCTTACCGCAAGGTTCT
+TCTTCGTAAGAACGGTAATAAAGGAGCTGGTGGCCATAGTTACGGCGCCGATCTAAAGTCATTTGACTTA
+GGCGACGAGCTTGGCACTGATCCTTATGAAGATTTTCAAGAAAACTGGAACACTAAACATAGCAGTGGTG
+TTACCCGTGAACTCATGCGTGAGCTTAACGGAGGGGCATACACTCGCTATGTCGATAACAACTTCTGTGG
+CCCTGATGGCTACCCTCTTGAGTGCATTAAAGACCTTCTAGCACGTGCTGGTAAAGCTTCATGCACTTTG
+TCCGAACAACTGGACTTTATTGACACTAAGAGGGGTGTATACTGCTGCCGTGAACATGAGCATGAAATTG
+CTTGGTACACGGAACGTTCTGAAAAGAGCTATGAATTGCAGACACCTTTTGAAATTAAATTGGCAAAGAA
+ATTTGACACCTTCAATGGGGAATGTCCAAATTTTGTATTTCCCTTAAATTCCATAATCAAGACTATTCAA
+CCAAGGGTTGAAAAGAAAAAGCTTGATGGCTTTATGGGTAGAATTCGATCTGTCTATCCAGTTGCGTCAC
+CAAATGAATGCAACCAAATGTGCCTTTCAACTCTCATGAAGTGTGATCATTGTGGTGAAACTTCATGGCA
+GACGGGCGATTTTGTTAAAGCCACTTGCGAATTTTGTGGCACTGAGAATTTGACTAAAGAAGGTGCCACT
+ACTTGTGGTTACTTACCCCAAAATGCTGTTGTTAAAATTTATTGTCCAGCATGTCACAATTCAGAAGTAG
+GACCTGAGCATAGTCTTGCCGAATACCATAATGAATCTGGCTTGAAAACCATTCTTCGTAAGGGTGGTCG
+CACTATTGCCTTTGGAGGCTGTGTGTTCTCTTATGTTGGTTGCCATAACAAGTGTGCCTATTGGGTTCCA
+CGTGCTAGCGCTAACATAGGTTGTAACCATACAGGTGTTGTTGGAGAAGGTTCCGAAGGTCTTAATGACA
+ACCTTCTTGAAATACTCCAAAAAGAGAAAGTCAACATCAATATTGTTGGTGACTTTAAACTTAATGAAGA
+GATCGCCATTATTTTGGCATCTTTTTCTGCTTCCACAAGTGCTTTTGTGGAAACTGTGAAAGGTTTGGAT
+TATAAAGCATTCAAACAAATTGTTGAATCCTGTGGTAATTTTAAAGTTACAAAAGGAAAAGCTAAAAAAG""".replace('\n', '')
+
+random.seed()
+samples = []
+
+for i in range(10):
+    sample_length = random.randint(100, min(3000, len(seq)))
+    max_start = len(seq) - sample_length
+    start_pos = random.randint(0, max_start)
+    sample = seq[start_pos:start_pos + sample_length]
+    samples.append(sample)
+
+print("Sample lengths (base pairs):")
+for i, sample in enumerate(samples):
+    print(f"Sample {i+1}: {len(sample)} bp")
+
+# Simulate gel electrophoresis migration
+max_length = 2000
+min_length = 0
+
+# Migration distance formula: shorter is farther from origin
+migration_distances = []
+for sample in samples:
+    normalized_distance = (len(sample) - min_length) / (max_length - min_length)
+    migration_distances.append(normalized_distance)
+
+fig, ax = plt.subplots(figsize=(6, 10))
+
+ax.set_xlim(-0.5, 1.5)
+ax.set_ylim(0, 1.1)
+
+lane_x = 0.5
+lane_width = 0.6
+
+for i in range(len(samples)):
+    band_y = migration_distances[i]
+    
+    ax.plot([lane_x - lane_width/3, lane_x + lane_width/3], [band_y, band_y], 
+            color='blue', linewidth=10, solid_capstyle='round', alpha=0.8)
+    
+    ax.text(lane_x + lane_width/2 + 0.15, band_y, f'{len(samples[i])} bp', 
+            va='center', fontsize=8, fontweight='bold')
+
+ax.set_ylabel('Migration Distance', fontsize=12, fontweight='bold')
+ax.set_title('Gel Electrophoresis Simulation', 
+             fontsize=14, fontweight='bold')
+ax.set_xticks([])
+
+ax.annotate('', xy=(-0.3, 0.9), xytext=(-0.3, 0.1),
+            arrowprops=dict(arrowstyle='->', lw=2, color='black'))
+ax.text(-0.35, 0.5, 'Migration\nDirection', fontsize=10, rotation=90, 
+        va='center', ha='center')
+
+ax.grid(True, alpha=0.3, axis='y')
+
+plt.tight_layout()
+plt.show()
+
+print("\nMigration Summary:")
+for i in range(10):
+    print(f"Sample {i+1}: {len(samples[i]):4d} bp -> Migration distance: {migration_distances[i]:.3f}")
