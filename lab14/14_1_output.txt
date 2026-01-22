@@ -1,0 +1,112 @@
+STEP 1: Count transitions for CpG+ model (S1)
+S1 sequence: ATCGATTCGATATCATACACGTAT
+
+Transition Counts (+)
+            A       C       G       T
+    A   0.000   2.000   0.000   6.000
+    C   2.000   0.000   3.000   0.000
+    G   2.000   0.000   0.000   1.000
+    T   3.000   3.000   0.000   1.000
+
+STEP 2: Count transitions for CpG- model (S2)
+S2 sequence: CTCGACTAGTATGAAGTCCACGCTTG
+
+Transition Counts (-)
+            A       C       G       T
+    A   1.000   2.000   2.000   1.000
+    C   1.000   1.000   2.000   3.000
+    G   2.000   1.000   0.000   2.000
+    T   2.000   2.000   2.000   1.000
+
+Transition Frequencies (+)
+            A       C       G       T
+    A   0.000   0.250   0.000   0.750
+    C   0.400   0.000   0.600   0.000
+    G   0.667   0.000   0.000   0.333
+    T   0.429   0.429   0.000   0.143
+
+Transition Frequencies (-)
+            A       C       G       T
+    A   0.167   0.333   0.333   0.167
+    C   0.143   0.143   0.286   0.429
+    G   0.400   0.200   0.000   0.400
+    T   0.286   0.286   0.286   0.143
+
+STEP 3: Calculate Log-Likelihood Matrix
+
+Log-Likelihood Matrix β = log2(Tr+/Tr-)
+            A       C       G       T
+    A -10.000  -0.415 -10.000   2.170
+    C   1.485 -10.000   1.070 -10.000
+    G   0.737 -10.000   0.000  -0.263
+    T   0.585   0.585 -10.000   0.000
+
+STEP 4: Score Test Sequence
+Test sequence: CAGGTTGGAAACGTAA
+
+Detailed scoring:
+  Position   Transition      Score
+-----------------------------------
+         0 C->         A      1.485
+         1 A->         G    -10.000
+         2 G->         G      0.000
+         3 G->         T     -0.263
+         4 T->         T      0.000
+         5 T->         G    -10.000
+         6 G->         G      0.000
+         7 G->         A      0.737
+         8 A->         A    -10.000
+         8 A->         A    -10.000
+         9 A->         A    -10.000
+        10 A->         C     -0.415
+        11 C->         G      1.070
+        12 G->         T     -0.263
+        13 T->         A      0.585
+         8 A->         A    -10.000
+         9 A->         A    -10.000
+        10 A->         C     -0.415
+         8 A->         A    -10.000
+         9 A->         A    -10.000
+         9 A->         A    -10.000
+        10 A->         C     -0.415
+        11 C->         G      1.070
+        12 G->         T     -0.263
+        13 T->         A      0.585
+        14 A->         A    -10.000
+
+Total Log-Likelihood Score:    -47.063
+RESULT:             NON-CpG ISLAND (-)
+The sequence is MORE LIKELY to belong to non-CpG regions.
+Negative score indicates higher similarity to the (-) model.
+PS C:\Users\roman\Desktop\Y4S1\BIOINFORMATICS>
+         9 A->         A    -10.000
+        10 A->         C     -0.415
+        11 C->         G      1.070
+        12 G->         T     -0.263
+        13 T->         A      0.585
+        14 A->         A    -10.000
+
+Total Log-Likelihood Score:    -47.063
+         9 A->         A    -10.000
+        10 A->         C     -0.415
+        11 C->         G      1.070
+        12 G->         T     -0.263
+        13 T->         A      0.585
+         9 A->         A    -10.000
+        10 A->         C     -0.415
+        11 C->         G      1.070
+        12 G->         T     -0.263
+         9 A->         A    -10.000
+        10 A->         C     -0.415
+         9 A->         A    -10.000
+         9 A->         A    -10.000
+        10 A->         C     -0.415
+        11 C->         G      1.070
+        12 G->         T     -0.263
+        13 T->         A      0.585
+        14 A->         A    -10.000
+
+Total Log-Likelihood Score:    -47.063
+RESULT:             NON-CpG ISLAND (-)
+The sequence is MORE LIKELY to belong to non-CpG regions.
+Negative score indicates higher similarity to the (-) model.
